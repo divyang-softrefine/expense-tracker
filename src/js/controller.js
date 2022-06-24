@@ -1,6 +1,9 @@
 const table = document.querySelector('.table');
-const balanceField = document.querySelector('#current-balance')
-
+const balanceField = document.querySelector('#current-balance');
+const inputType = document.querySelector('#inputType');
+const inputDesp = document.querySelector('#inputDesp');
+const inputPrice = document.querySelector('#inputPrice');
+const inputSubmit = document.querySelector('#submitBtn')
 class data{
     constructor(type,desp,amount){
         this.id = String(new Date().getTime()).slice(6);
@@ -27,7 +30,8 @@ class App{
         this.renderBalance();
         this.onLoad();
         this.addHandler();
-        this.addDeleteButtonHandler();
+
+        // console.log(this.#balance,this.#movements)
     }
     loadBalance(){
         this.#balance = 0;
@@ -48,27 +52,21 @@ class App{
             <th>Amount</th>
             <th>Edit</th>
         </tr>
-    </thead>${this.#movements.map(_data=>{return `<tr class="data-field" data-id=${_data.id}>
-    <td class="type-field">${_data.type}</td>
-    <td class="description-field">${_data.desp}</td>
-    <td class="amount-field">${_data.amount}</td>
-    <td><button class='deleteBtn'>Delete</button></td>
-    </tr> `}).join('')}`;
-    
+    </thead>`;
         table.innerHTML = markup;
+        this.#movements.forEach(ele=>this.renderData(ele));
     }
     renderData(_data){
         const  markup = `<tr class="data-field" data-id=${_data.id}>
         <td class="type-field">${_data.type}</td>
         <td class="description-field">${_data.desp}</td>
         <td class="amount-field">${_data.amount}</td>
-        <td><button class='deleteBtn'>Delete</button></td>
+        <td><button id='del-${_data.id}'>Delete</button></td>
         </tr> `;
         table.insertAdjacentHTML('beforeend',markup);
-        this.addDeleteButtonHandler();
+        this.addDeleteButtonHandler(_data.id);
     }
     updateMovements(data){
-
         this.#movements.push(data);
         localStorage.setItem('movements',JSON.stringify(this.#movements))
         const movement = this.#movements.at(-1)
@@ -87,7 +85,13 @@ class App{
             e.target.children[0].value,
             e.target.children[1].value,
             e.target.children[2].value));
-
+        
+        this.clearInput();
+    }
+    clearInput(){
+        document.querySelectorAll('input').forEach(ele=>{
+            if(ele.type!=='submit') ele.value = '';
+        })
     }
     deleteMovement(id){
         for(let i = 0;i < this.#movements.length; i++){
@@ -99,21 +103,28 @@ class App{
                 break;
             }
         }
-        this.onLoad();
-        this.addDeleteButtonHandler();
+        // console.log(document.getElementsByClassName('data-field'),`helllo`);
         this.renderBalance();
+    }
+
+    color(){
+        inputSubmit.style.background = inputType.style.background = inputDesp.style.borderColor = inputPrice.style.borderColor = inputType.value==='Income' ? 'green' : 'red';
     }
     addHandler(){
         document.querySelector('#form').addEventListener('submit',this.addData.bind(this))
+        window.addEventListener('load',this.color.bind(this))
+        inputType.addEventListener('change',this.color.bind(this))
+        
+    }
+    
+    
+    delButton(e){
+        this.deleteMovement(e.target.id.slice(4))
+        e.target.closest('.data-field').remove();
     }
 
-    addDeleteButtonHandler(){
-        document.querySelectorAll('.deleteBtn').forEach(ele=>{
-            console.log(ele)
-            ele.addEventListener('click',function(e){
-                this.deleteMovement(e.target.closest('.data-field').dataset.id)
-            }.bind(this))
-        })
+    addDeleteButtonHandler(id){
+        document.querySelector(`#del-${id}`).addEventListener('click',this.delButton.bind(this))
     }
 }
 const app = new App();

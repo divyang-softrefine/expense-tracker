@@ -83,4 +83,20 @@ tr > :nth-child(2) {
   width: 70%;
 }
 
+input {
+  border-style: solid;
+  padding: 1rem;
+}
+
+select {
+  color: #fff;
+  border: 0;
+  padding: 1rem;
+}
+
+#submitBtn {
+  color: #fff;
+  border: 0;
+}
+
 /*# sourceMappingURL=index.f7626f62.css.map */
