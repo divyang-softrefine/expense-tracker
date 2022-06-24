@@ -60,12 +60,20 @@ thead * {
   font-size: 1.4rem;
 }
 
+#form {
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  display: flex;
+}
+
 .balance-container {
   width: fit-content;
   color: #10617f;
   flex-flow: wrap;
   justify-content: space-between;
-  gap: 5rem;
+  gap: 2rem;
   margin-top: 1rem;
   font-size: 3.6rem;
   display: flex;
@@ -89,14 +97,13 @@ input {
 }
 
 select {
-  color: #fff;
-  border: 0;
   padding: 1rem;
 }
 
 #submitBtn {
   color: #fff;
   border: 0;
+  padding: 1.2rem;
 }
 
 .popup {

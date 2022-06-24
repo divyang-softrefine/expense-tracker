@@ -90,7 +90,7 @@ class App{
             return;
         }
             despError.closest('.popup').classList.remove('show');
-            
+
         if(!inputPrice.value || !Number(inputPrice.value)){
             priceError.closest('.popup').classList.add('show');
             return;
@@ -120,7 +120,7 @@ class App{
     }
 
     color(){
-        inputSubmit.style.background = inputType.style.background = inputDesp.style.borderColor = inputPrice.style.borderColor = inputType.value==='Income' ? 'green' : 'red';
+        inputSubmit.style.background = inputDesp.style.borderColor = inputPrice.style.borderColor = inputType.value==='Income' ? 'green' : 'red';
     }
     addHandler(){
         document.querySelector('#form').addEventListener('submit',this.addData.bind(this))
@@ -131,12 +131,15 @@ class App{
     
     
     delButton(e){
-        this.deleteMovement(e.target.id.slice(4))
-        e.target.closest('.data-field').remove();
+        let text = `Do you really want to delete the element`;
+        if (confirm(text)) {
+            this.deleteMovement(e.target.id.slice(4))
+            e.target.closest('.data-field').remove();
+        }
     }
 
     addDeleteButtonHandler(id){
-        document.querySelector(`#del-${id}`).addEventListener('click',this.delButton.bind(this))
+        document.querySelector(`#del-${id}`).addEventListener('click',this.delButton.bind(this));
     }
 }
 const app = new App();

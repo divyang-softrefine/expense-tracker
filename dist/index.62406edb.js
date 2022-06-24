@@ -105,7 +105,7 @@ class App {
         this.renderBalance();
     }
     color() {
-        inputSubmit.style.background = inputType.style.background = inputDesp.style.borderColor = inputPrice.style.borderColor = inputType.value === "Income" ? "green" : "red";
+        inputSubmit.style.background = inputDesp.style.borderColor = inputPrice.style.borderColor = inputType.value === "Income" ? "green" : "red";
     }
     addHandler() {
         document.querySelector("#form").addEventListener("submit", this.addData.bind(this));
@@ -113,8 +113,11 @@ class App {
         inputType.addEventListener("change", this.color.bind(this));
     }
     delButton(e) {
-        this.deleteMovement(e.target.id.slice(4));
-        e.target.closest(".data-field").remove();
+        let text = `Do you really want to delete the element`;
+        if (confirm(text)) {
+            this.deleteMovement(e.target.id.slice(4));
+            e.target.closest(".data-field").remove();
+        }
     }
     addDeleteButtonHandler(id) {
         document.querySelector(`#del-${id}`).addEventListener("click", this.delButton.bind(this));
