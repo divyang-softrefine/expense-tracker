@@ -27,8 +27,14 @@
                     <option value="Income">Income</option>
                     <option value="Expense">Expense</option>
                 </select>
+                <div class="popup">
                 <input type="text" placeholder="Add Description" class="form-control " id="inputDesp">
-                <input type="number" class="form-control " min="0" id="inputPrice">
+                <span class="popuptext" id="despError">Invalid input, please check</span>
+                </div>
+                <div class="popup">
+                    <input type="number" class="form-control " min="0" id="inputPrice">
+                    <span class="popuptext" id="priceError">Invalid input, please check</span>
+                </div>
                 <input type="submit" value="Submit" class="form-control" id="submitBtn">
             </form>
         </div>

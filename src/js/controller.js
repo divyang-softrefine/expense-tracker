@@ -3,7 +3,9 @@ const balanceField = document.querySelector('#current-balance');
 const inputType = document.querySelector('#inputType');
 const inputDesp = document.querySelector('#inputDesp');
 const inputPrice = document.querySelector('#inputPrice');
-const inputSubmit = document.querySelector('#submitBtn')
+const inputSubmit = document.querySelector('#submitBtn');
+const despError = document.querySelector('#despError');
+const priceError = document.querySelector('#priceError');
 class data{
     constructor(type,desp,amount){
         this.id = String(new Date().getTime()).slice(6);
@@ -82,14 +84,24 @@ class App{
     addData(e){
         e.preventDefault();
 
-        if([...e.target.children].find(ele=>ele.value==='')){alert('Please fill all details necessary');}
-        else{
-        this.updateMovements(new data(
-            e.target.children[0].value,
-            e.target.children[1].value,
-            e.target.children[2].value));
-        
+        if(!inputDesp.value){
+            console.log('test')
+            despError.closest('.popup').classList.add('show');
+            setTimeout(()=>{despError.closest('.popup').classList.remove('show')},4000)
+            this.clearInput();
+            return;
         }
+
+        if(!inputPrice.value || !Number(inputPrice.value)){
+            priceError.closest('.popup').classList.add('show');
+            setTimeout(()=>{priceError.closest('.popup').classList.remove('show')},4000)
+            this.clearInput();
+            return;
+        }
+        
+        this.updateMovements(new data(inputType.value,inputDesp.value,inputPrice.value));
+        
+        
         this.clearInput();
     }
     clearInput(){
