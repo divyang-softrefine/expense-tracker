@@ -82,12 +82,14 @@ class App{
     addData(e){
         e.preventDefault();
 
-        if([...e.target.children].find(ele=>ele.value==='')){alert('Please fill all details necessary'); return;}
+        if([...e.target.children].find(ele=>ele.value==='')){alert('Please fill all details necessary');}
+        else{
         this.updateMovements(new data(
             e.target.children[0].value,
             e.target.children[1].value,
             e.target.children[2].value));
         
+        }
         this.clearInput();
     }
     clearInput(){
