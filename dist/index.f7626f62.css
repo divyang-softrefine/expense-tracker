@@ -97,6 +97,7 @@ input {
 }
 
 select {
+  width: 150px;
   padding: 1rem;
 }
 
