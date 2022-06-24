@@ -41,11 +41,13 @@ $text-default : #10617f;
 .table-container{
     width: 100%;
     height: initial;
-    overflow: auto;
+    overflow-y: auto;
 }
 .table{
     width: 100%;
     margin-top: 1rem;
+    border-collapse: separate;
+    border-spacing: .2rem .5em;
     font-size: 1.4rem;
 }
 thead{
@@ -69,17 +71,17 @@ thead{
     color: $text-default;
 }
 
-.description-field{
-    text-overflow: ellipsis;
-}
-tr>*{
-    
-    &:not(:nth-child(2)){
-        text-align: center;
-    }
+tr{
+    width: 100%;
+    &>*{
+        
+        &:not(:nth-child(2)){
+            text-align: center;
+        }
 
 
-    &:nth-child(2){
-    width: 70%;
+        &:nth-child(2){
+        width: 70%;
+        }
     }
 }

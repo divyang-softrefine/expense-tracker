@@ -40,11 +40,13 @@ html {
 .table-container {
   width: 100%;
   height: initial;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .table {
   width: 100%;
+  border-collapse: separate;
+  border-spacing: .2rem .5em;
   margin-top: 1rem;
   font-size: 1.4rem;
 }
@@ -69,8 +71,8 @@ thead * {
   display: flex;
 }
 
-.description-field {
-  text-overflow: ellipsis;
+tr {
+  width: 100%;
 }
 
 tr > :not(:nth-child(2)) {
