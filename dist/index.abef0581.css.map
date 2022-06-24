@@ -1,0 +1,1 @@
+{"mappings":"ACAA","sources":["index.abef0581.css","src/sass/main.scss"],"sourcesContent":["html {\n  background: #1699c9;\n  font-size: 62.5%;\n}\n\n/*# sourceMappingURL=index.abef0581.css.map */\n","html{\n    font-size: 62.5%;\n    background: #1699c9;\n}\n"],"names":[],"version":3,"file":"index.abef0581.css.map"}

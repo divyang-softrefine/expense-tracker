@@ -1,0 +1,85 @@
+html{
+    font-size: 62.5%;
+    background: #1699c9;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+$text-default : #10617f;
+*,*::after,*::before{
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    text-decoration: inherit;
+    font-size: inherit;
+}
+
+.m-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tracker{
+    width: clamp(200px,90%,2000px);
+    height: 500px;
+    padding: 2rem;
+    background-color: white;
+    margin-top: 3rem;
+    
+    box-shadow: 0 0 15px rgba(0,0,0,0.125);
+
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    gap : 2rem;
+    row-gap: 2rem;
+    align-items: center;
+}
+.heading-two{
+    font-size: 2.4rem;
+    color: $text-default;
+}
+.table-container{
+    width: 100%;
+    height: initial;
+    overflow: auto;
+}
+.table{
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+}
+thead{
+    *{
+        background-color: #1699c9;
+        font-size: 1.6rem;
+    }
+}
+.form-control{
+    font-size: 1.4rem;
+}
+
+.balance-container{
+    width: fit-content;
+    gap: 5rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    font-size: 3.6rem;
+    color: $text-default;
+}
+
+.description-field{
+    text-overflow: ellipsis;
+}
+tr>*{
+    
+    &:not(:nth-child(2)){
+        text-align: center;
+    }
+
+
+    &:nth-child(2){
+    width: 70%;
+    }
+}

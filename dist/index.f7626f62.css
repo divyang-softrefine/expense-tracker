@@ -1,0 +1,84 @@
+html {
+  box-sizing: border-box;
+  background: #1699c9;
+  font-family: Roboto, sans-serif;
+  font-size: 62.5%;
+}
+
+*, :after, :before {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.m-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tracker {
+  width: clamp(200px, 90%, 2000px);
+  height: 500px;
+  background-color: #fff;
+  flex-flow: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 3rem;
+  padding: 2rem;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 0 15px #00000020;
+}
+
+.heading-two {
+  color: #10617f;
+  font-size: 2.4rem;
+}
+
+.table-container {
+  width: 100%;
+  height: initial;
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}
+
+thead * {
+  background-color: #1699c9;
+  font-size: 1.6rem;
+}
+
+.form-control {
+  font-size: 1.4rem;
+}
+
+.balance-container {
+  width: fit-content;
+  color: #10617f;
+  flex-flow: wrap;
+  justify-content: space-between;
+  gap: 5rem;
+  margin-top: 1rem;
+  font-size: 3.6rem;
+  display: flex;
+}
+
+.description-field {
+  text-overflow: ellipsis;
+}
+
+tr > :not(:nth-child(2)) {
+  text-align: center;
+}
+
+tr > :nth-child(2) {
+  width: 70%;
+}
+
+/*# sourceMappingURL=index.f7626f62.css.map */
