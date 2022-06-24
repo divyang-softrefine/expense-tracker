@@ -109,41 +109,18 @@ select {
 .popup .popuptext {
   visibility: hidden;
   width: 160px;
-  color: #fff;
+  color: red;
   text-align: center;
   z-index: 1;
-  background-color: #555;
-  border-radius: 6px;
   margin-left: -80px;
-  padding: 8px 0;
+  padding: 1rem 0;
   position: absolute;
-  bottom: 125%;
+  bottom: -100%;
   left: 50%;
-}
-
-.popup .popuptext:after {
-  content: "";
-  border: 5px solid #0000;
-  border-top-color: #555;
-  margin-left: -5px;
-  position: absolute;
-  top: 100%;
-  left: 50%;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
 }
 
 .show .popuptext {
   visibility: visible;
-  animation: fadeIn 1s;
 }
 
 /*# sourceMappingURL=index.f7626f62.css.map */

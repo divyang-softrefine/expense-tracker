@@ -87,20 +87,16 @@ class App{
         if(!inputDesp.value){
             console.log('test')
             despError.closest('.popup').classList.add('show');
-            setTimeout(()=>{despError.closest('.popup').classList.remove('show')},4000)
-            this.clearInput();
             return;
         }
-
+            despError.closest('.popup').classList.remove('show');
+            
         if(!inputPrice.value || !Number(inputPrice.value)){
             priceError.closest('.popup').classList.add('show');
-            setTimeout(()=>{priceError.closest('.popup').classList.remove('show')},4000)
-            this.clearInput();
             return;
         }
-        
+            priceError.closest('.popup').classList.remove('show');
         this.updateMovements(new data(inputType.value,inputDesp.value,inputPrice.value));
-        
         
         this.clearInput();
     }
