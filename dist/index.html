@@ -1,1 +1,78 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"><link rel="stylesheet" href="/index.75df1538.css"><script defer src="/index.f082ab67.js"></script></head><body> <div class="m-auto tracker"> <h2 class="heading-two m-auto">Expense Tracker</h2> <div class="balance-container"> <h3>Balance :</h3> <div> <span id="current-balance">333</span> <span>INR</span> </div> </div> <div class="form-container"> <form class="m-auto" id="form"> <div class="popup"> <select id="inputType" class="form-control"> <option value="Select" selected>Select</option> <option value="Income">Income</option> <option value="Expense">Expense</option> </select> <span class="popuptext" id="typeError"></span> </div> <div class="popup"> <input type="text" placeholder="Add Description" class="form-control" id="inputDesp"> <span class="popuptext" id="despError">INVALID DESCRIPTION, PLEASE CHECK</span> </div> <div class="popup"> <input type="number" class="form-control" min="0" id="inputPrice"> <span class="popuptext" id="priceError">INVALID AMOUNT, PLEASE CHECK</span> </div> <input type="submit" value="Submit" class="form-control" id="submitBtn"> </form> </div> <div class="table-container"> <div class="positive"> <h3>Income</h3> <table class="table-positive"> <thead> <tr> <th>Description</th> <th>Amount</th> <th>Edit</th> </tr> </thead> </table> <div class="total-container"> <span>TOTAL : </span><span class="total"></span> </div> </div> <div class="negative"> <h3>Deposit</h3> <table class="table-negative"> <thead> <tr> <th>Description</th> <th>Amount</th> <th>Edit</th> </tr> </thead> </table> <div class="total-container"> <span>TOTAL : </span><span class="total"></span> </div> </div> </div> </div> </body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/index.f7626f62.css">
+    <script defer="" src="/index.62406edb.js"></script>
+</head>
+<body>
+    <div class="tracker m-auto">
+        <h2 class="heading-two m-auto">Expense Tracker</h2>
+        <div class="balance-container">
+            <h3>Balance :</h3>
+            <span id="current-balance">333</span>
+        </div>
+        <div class="form-container">
+            <form class="m-auto" id="form">
+            <div class="popup">
+                <select id="inputType" class="form-control">
+                    <option value="Select" selected="">Select</option>
+                    <option value="Income">Income</option>
+                    <option value="Expense">Expense</option>
+                </select>
+                <span class="popuptext" id="typeError"></span>
+            </div>
+                <div class="popup">
+                <input type="text" placeholder="Add Description" class="form-control " id="inputDesp">
+                <span class="popuptext" id="despError">INVALID DESCRIPTION, PLEASE CHECK</span>
+                </div>
+                <div class="popup">
+                    <input type="number" class="form-control " min="0" id="inputPrice">
+                    <span class="popuptext" id="priceError">INVALID AMOUNT, PLEASE CHECK</span>
+                </div>
+                <input type="submit" value="Submit" class="form-control" id="submitBtn">
+            </form>
+        </div>
+        <div class="table-container">
+            <div class="positive">
+                <h3>Income</h3>
+                <table class="table-positive">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="total-container">
+                    <span>TOTAL : </span><span class="total"></span>
+                </div>
+            </div>
+            
+            <div class="negative">
+                <h3>Expense</h3>
+                <table class="table-negative">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="total-container">
+                    <span>TOTAL : </span><span class="total"></span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

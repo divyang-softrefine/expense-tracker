@@ -38,6 +38,7 @@ class App {
         this.renderBalance();
         this.onLoad();
         this.addHandler();
+        this.renderTotals();
     // console.log(this.#balance,this.#movements)
     }
     loadBalance() {
@@ -94,8 +95,8 @@ class App {
         for(let i = 0; i < this.#negative_movements.length; i++)neg_sum += this.#negative_movements[i].amount;
         let pos_sum = 0;
         for(let i1 = 0; i1 < this.#positive_movements.length; i1++)pos_sum += this.#positive_movements[i1].amount;
-        totalNegative.textContent = neg_sum;
-        totalPositive.textContent = pos_sum;
+        totalNegative.textContent = `${pos_sum === 0 ? `` : `(${Math.round(neg_sum / pos_sum * 100)}% of Income used)`} ${neg_sum}`;
+        totalPositive.textContent = `${pos_sum}`;
     }
     renderBalance() {
         balanceField.textContent = this.#balance;

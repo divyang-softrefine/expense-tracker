@@ -47,7 +47,7 @@ class App{
         this.renderBalance();
         this.onLoad();
         this.addHandler();
-
+        this.renderTotals();
         // console.log(this.#balance,this.#movements)
     }
     loadBalance(){
@@ -116,8 +116,8 @@ class App{
         for(let i = 0; i < this.#positive_movements.length; i++)
             pos_sum+=this.#positive_movements[i].amount;
         
-        totalNegative.textContent = neg_sum;
-        totalPositive.textContent = pos_sum;
+        totalNegative.textContent = `${pos_sum === 0 ? `` : `(${Math.round((neg_sum/pos_sum )* 100)}% of Income used)`} ${neg_sum}`;
+        totalPositive.textContent =  `${pos_sum}`;
     }
 
     renderBalance(){

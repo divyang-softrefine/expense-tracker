@@ -1,12 +1,14 @@
 html{
-    font-size: 62.5%;
-    background: #1699c9;
-    box-sizing: border-box;
+    font-size: 62.5%;background: rgb(54,50,126);
+    background: radial-gradient(circle, rgba(54,50,126,1) 0%, rgba(22,22,166,1) 38%, rgba(13,135,161,1) 100%);
+
     font-family: 'Roboto', sans-serif;
 }
-$text-default : #10617f;
+
+$text-default : #333;
 *,*::after,*::before{
     margin: 0;
+    box-sizing: border-box;
     padding: 0;
     color: inherit;
     text-decoration: inherit;
@@ -19,28 +21,28 @@ $text-default : #10617f;
 }
 
 .tracker{
-    width: clamp(200px,90%,2000px);
-    height: 500px;
-    padding: 2rem;
-    background-color: white;
-    margin-top: 3rem;
-    
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    padding : 2rem;
+    background-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 0 15px rgba(0,0,0,0.125);
-
     display: flex;
     flex-flow: column nowrap;
     overflow: hidden;
     gap : 2rem;
     row-gap: 2rem;
     align-items: center;
+    color : $text-default;
 }
 .heading-two{
     font-size: 2.4rem;
     color: $text-default;
+    text-transform: uppercase;
 }
 .table-container{
     width: 100%;
-    height: inherit;
+    flex-grow: 1;
     overflow-y: auto;
     display: flex;
     gap : 2rem;
@@ -48,7 +50,6 @@ $text-default : #10617f;
 
     &>*{
     margin-top: 1rem;
-    border-collapse: separate;
     border-spacing: .2rem .5em;
     font-size: 1.4rem;
     flex-grow: 1;
@@ -60,31 +61,49 @@ $text-default : #10617f;
     & table{
         width: 100%;
         margin-top: 1rem;
-        border-collapse: separate;
         border-spacing: .2rem .5em;
         font-size: 1.4rem;
-        flex-grow: 1;    
     }
     }
 }
-
+.total-container{
+    margin-top: auto;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
 .positive,.negative{
-    position: relative;
+    display: flex;
+    flex-flow: column;
     overflow: hidden;
-    .total-container{
-        position : absolute;
-        display: flex;
-        justify-content: space-between;
-        bottom : 0;
-        width: 100%;
+    background-color: #fff;
+
+    border-radius: 2rem;
+    padding : 1rem;
+}
+
+.positive{
+    .total{
+        color : green;
     }
 }
 
+.negative{
+    .total{
+        color : red;
+    }
+}
 thead{
     *{
-        background-color: #1699c9;
+        text-transform: uppercase;
         font-size: 1.6rem;
+        background-color: rgba(0,0,0,0.05);
     }
+}
+
+td{
+    border-bottom: 1px solid #999;
 }
 .form-control{
     font-size: 1.4rem;
@@ -106,19 +125,23 @@ thead{
     justify-content: space-between;
     font-size: 3.6rem;
     color: $text-default;
+    text-transform: uppercase;
+    h3{
+        color: white;
+    }
+    font-weight: 700;
 }
 
 tr{
     width: 100%;
     &>*{
-        
-        &:not(:nth-child(1)){
-            text-align: center;
-        }
 
-
+        text-align: left;
+        padding : 0.5rem 1rem;
         &:nth-child(1){
         width: 60%;
+        max-width: 200px;
+        overflow-x: auto;
         }
     }
 }
@@ -137,7 +160,6 @@ select{
     border : 0px;
     padding: 1.2rem;
 }
-
 .popup {
     position: relative;
     display: inline-block;
@@ -152,24 +174,48 @@ select{
   .popup .popuptext {
     visibility: hidden;
     width: 160px;
+    background-color: #fff;
     color: red;
     text-align: center;
-    padding: 1rem 0;
+    border-radius: 6px;
+    padding: 8px 1rem;
     position: absolute;
+    
     z-index: 1;
-    bottom: -100%;
+    bottom: 125%;
     left: 50%;
     margin-left: -80px;
   }
   
+  /* Popup arrow */
+  .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+  }
   
-
-
-
   /* Toggle this class - hide and show the popup */
   .show {
-   .popuptext{   
-        visibility: visible;
+    .popuptext{
 
-   }
+        visibility: visible;
+        -webkit-animation: fadeIn 1s;
+        animation: fadeIn 1s;
+    }
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
   }

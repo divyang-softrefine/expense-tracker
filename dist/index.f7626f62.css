@@ -1,11 +1,11 @@
 html {
-  box-sizing: border-box;
-  background: #1699c9;
+  background: radial-gradient(circle, #36327e 0%, #1616a6 38%, #0d87a1 100%);
   font-family: Roboto, sans-serif;
   font-size: 62.5%;
 }
 
 *, :after, :before {
+  box-sizing: border-box;
   color: inherit;
   text-decoration: inherit;
   font-size: inherit;
@@ -19,13 +19,14 @@ html {
 }
 
 .tracker {
-  width: clamp(200px, 90%, 2000px);
-  height: 500px;
-  background-color: #fff;
+  width: 100vw;
+  height: auto;
+  min-height: 100vh;
+  color: #333;
+  background-color: #ffffff80;
   flex-flow: column;
   align-items: center;
   gap: 2rem;
-  margin-top: 3rem;
   padding: 2rem;
   display: flex;
   overflow: hidden;
@@ -33,21 +34,21 @@ html {
 }
 
 .heading-two {
-  color: #10617f;
+  color: #333;
+  text-transform: uppercase;
   font-size: 2.4rem;
 }
 
 .table-container {
   width: 100%;
-  height: inherit;
   flex-flow: wrap;
+  flex-grow: 1;
   gap: 2rem;
   display: flex;
   overflow-y: auto;
 }
 
 .table-container > * {
-  border-collapse: separate;
   border-spacing: .2rem .5em;
   flex-grow: 1;
   margin-top: 1rem;
@@ -62,29 +63,44 @@ html {
 
 .table-container > * table {
   width: 100%;
-  border-collapse: separate;
   border-spacing: .2rem .5em;
-  flex-grow: 1;
   margin-top: 1rem;
   font-size: 1.4rem;
 }
 
+.total-container {
+  flex-flow: row;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: 0 1rem;
+  display: flex;
+}
+
 .positive, .negative {
-  position: relative;
+  background-color: #fff;
+  border-radius: 2rem;
+  flex-flow: column;
+  padding: 1rem;
+  display: flex;
   overflow: hidden;
 }
 
-.positive .total-container, .negative .total-container {
-  width: 100%;
-  justify-content: space-between;
-  display: flex;
-  position: absolute;
-  bottom: 0;
+.positive .total {
+  color: green;
+}
+
+.negative .total {
+  color: red;
 }
 
 thead * {
-  background-color: #1699c9;
+  text-transform: uppercase;
+  background-color: #0000000d;
   font-size: 1.6rem;
+}
+
+td {
+  border-bottom: 1px solid #999;
 }
 
 .form-control {
@@ -101,25 +117,34 @@ thead * {
 
 .balance-container {
   width: fit-content;
-  color: #10617f;
+  color: #333;
+  text-transform: uppercase;
   flex-flow: wrap;
   justify-content: space-between;
   gap: 2rem;
   margin-top: 1rem;
   font-size: 3.6rem;
+  font-weight: 700;
   display: flex;
+}
+
+.balance-container h3 {
+  color: #fff;
 }
 
 tr {
   width: 100%;
 }
 
-tr > :not(:nth-child(1)) {
-  text-align: center;
+tr > * {
+  text-align: left;
+  padding: .5rem 1rem;
 }
 
 tr > :nth-child(1) {
   width: 60%;
+  max-width: 200px;
+  overflow-x: auto;
 }
 
 input {
@@ -151,15 +176,38 @@ select {
   color: red;
   text-align: center;
   z-index: 1;
+  background-color: #fff;
+  border-radius: 6px;
   margin-left: -80px;
-  padding: 1rem 0;
+  padding: 8px 1rem;
   position: absolute;
-  bottom: -100%;
+  bottom: 125%;
+  left: 50%;
+}
+
+.popup .popuptext:after {
+  content: "";
+  border: 5px solid #0000;
+  border-top-color: #fff;
+  margin-left: -5px;
+  position: absolute;
+  top: 100%;
   left: 50%;
 }
 
 .show .popuptext {
   visibility: visible;
+  animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /*# sourceMappingURL=index.f7626f62.css.map */
