@@ -6,6 +6,7 @@ const inputPrice = document.querySelector('#inputPrice');
 const inputSubmit = document.querySelector('#submitBtn');
 const despError = document.querySelector('#despError');
 const priceError = document.querySelector('#priceError');
+const typeError = document.querySelector('#typeError');
 class data{
     constructor(type,desp,amount){
         this.id = String(new Date().getTime()).slice(6);
@@ -87,31 +88,32 @@ class App{
     addData(e){
         e.preventDefault();
         let desp = null;
+        let check = false;
         if(inputType.value === 'Select'){
             desp = despError.textContent;
-            despError.textContent = `Only Income and Expense are allowed!!!`
-            despError.closest('.popup').classList.add('show');
-            return;
+            typeError.textContent = `Only Income and Expense are allowed!!!`
+            typeError.closest('.popup').classList.add('show');
+            check = true;
         }
-
-        despError.closest('.popup').classList.remove('show');
         // console.log(inputDesp.value.length)
         if(!inputDesp.value || inputDesp.value.length > 128){
             despError.textContent = `Despcription should be between 1 and 128 characters, Thank you!`;
             despError.closest('.popup').classList.add('show');
-            return;
+            check = true;
+
         }
-        despError.closest('.popup').classList.remove('show');
 
         if(!inputPrice.value || !Number(inputPrice.value)){
             priceError.closest('.popup').classList.add('show');
-            return;
-        }else if(inputType.value === 'Expense' && Number(inputPrice.value) > this.#balance){
-            priceError.textContent = 'EXPENSE CANNOT EXCEED BALANCE';
-            priceError.closest('.popup').classList.add('show');
+            check = true;
+        }
+        if(check){
             return;
         }
-            priceError.closest('.popup').classList.remove('show');
+        check = false;
+        despError.closest('.popup').classList.remove('show');   
+        typeError.closest('.popup').classList.remove('show');
+        priceError.closest('.popup').classList.remove('show');
         this.updateMovements(new data(inputType.value,inputDesp.value,inputPrice.value));
         this.clearInput();
     }

@@ -23,11 +23,14 @@
         </div>
         <div class="form-container">
             <form class="m-auto" id="form">
+            <div class="popup">
                 <select id="inputType" class="form-control">
                     <option value="Select" selected>Select</option>
                     <option value="Income">Income</option>
                     <option value="Expense">Expense</option>
                 </select>
+                <span class="popuptext" id="typeError"></span>
+            </div>
                 <div class="popup">
                 <input type="text" placeholder="Add Description" class="form-control " id="inputDesp">
                 <span class="popuptext" id="despError">INVALID DESCRIPTION, PLEASE CHECK</span>
