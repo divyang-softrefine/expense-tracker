@@ -103,9 +103,6 @@ class App {
         } else priceError.closest(".popup").classList.remove("show");
         if (check) return;
         check = false;
-        despError.closest(".popup").classList.remove("show");
-        typeError.closest(".popup").classList.remove("show");
-        priceError.closest(".popup").classList.remove("show");
         this.updateMovements(new data(inputType.value, inputDesp.value, inputPrice.value));
         this.clearInput();
     }
