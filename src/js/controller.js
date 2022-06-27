@@ -69,11 +69,14 @@ class App{
         this.addDeleteButtonHandler(_data.id);
     }
     updateMovements(data){
+        // CHECK IF MOVMENT IS VALID
+        console.log(typeof data.amount)
+
         this.#movements.push(data);
-        localStorage.setItem('movements',JSON.stringify(this.#movements))
-        const movement = this.#movements.at(-1)
-        this.updateBalance(movement.amount)
-        this.renderData(movement);
+        localStorage.setItem('movements',JSON.stringify(this.#movements));
+
+        this.updateBalance(data.amount);
+        this.renderData(data);
         this.renderBalance();
     }
 
@@ -83,27 +86,43 @@ class App{
     }
     addData(e){
         e.preventDefault();
-
-        if(!inputDesp.value){
-            console.log('test')
+        let desp = null;
+        if(inputType.value === 'Select'){
+            desp = despError.textContent;
+            despError.textContent = `Only Income and Expense are allowed!!!`
             despError.closest('.popup').classList.add('show');
             return;
         }
-            despError.closest('.popup').classList.remove('show');
+
+        despError.closest('.popup').classList.remove('show');
+        // console.log(inputDesp.value.length)
+        if(!inputDesp.value || inputDesp.value.length > 128){
+            despError.textContent = `Despcription should be between 1 and 128 characters, Thank you!`;
+            despError.closest('.popup').classList.add('show');
+            return;
+        }
+        despError.closest('.popup').classList.remove('show');
 
         if(!inputPrice.value || !Number(inputPrice.value)){
+            priceError.closest('.popup').classList.add('show');
+            return;
+        }else if(inputType.value === 'Expense' && Number(inputPrice.value) > this.#balance){
+            priceError.textContent = 'EXPENSE CANNOT EXCEED BALANCE';
             priceError.closest('.popup').classList.add('show');
             return;
         }
             priceError.closest('.popup').classList.remove('show');
         this.updateMovements(new data(inputType.value,inputDesp.value,inputPrice.value));
-        
         this.clearInput();
     }
     clearInput(){
         document.querySelectorAll('input').forEach(ele=>{
             if(ele.type!=='submit') ele.value = '';
         })
+        inputType.children[0].selected = true;
+        inputType.children[1].selected = false;
+        inputType.children[2].selected = false;
+        window.requestAnimationFrame(this.color.bind(this));
     }
     deleteMovement(id){
         for(let i = 0;i < this.#movements.length; i++){
@@ -120,13 +139,21 @@ class App{
     }
 
     color(){
-        inputSubmit.style.background = inputDesp.style.borderColor = inputPrice.style.borderColor = inputType.value==='Income' ? 'green' : 'red';
+        if(inputType.value==='Income'){
+            inputSubmit.style.background = inputDesp.style.borderColor = inputPrice.style.borderColor = 'green';
+            inputSubmit.style.color = 'white';
+        }else if(inputType.value == 'Expense'){
+            inputSubmit.style.background = inputDesp.style.borderColor = inputPrice.style.borderColor = 'red';
+            inputSubmit.style.color = 'white';
+        }else{
+            inputSubmit.style.background = inputDesp.style.borderColor = inputPrice.style.borderColor = '';
+            inputSubmit.style.color = 'black';
+        }
     }
     addHandler(){
-        document.querySelector('#form').addEventListener('submit',this.addData.bind(this))
-        window.addEventListener('load',this.color.bind(this))
-        inputType.addEventListener('change',this.color.bind(this))
-        
+        document.querySelector('#form').addEventListener('submit',this.addData.bind(this));
+        window.addEventListener('load',this.color.bind(this));
+        inputType.addEventListener('change',this.color.bind(this));
     }
     
     
