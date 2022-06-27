@@ -83,17 +83,24 @@ class App {
             typeError.textContent = `Only Income and Expense are allowed!!!`;
             typeError.closest(".popup").classList.add("show");
             check = true;
-        }
+        } else typeError.closest(".popup").classList.remove("show");
         // console.log(inputDesp.value.length)
-        if (!inputDesp.value || inputDesp.value.length > 128) {
-            despError.textContent = `Despcription should be between 1 and 128 characters, Thank you!`;
-            despError.closest(".popup").classList.add("show");
-            check = true;
-        }
-        if (!inputPrice.value || !Number(inputPrice.value)) {
+        if (!inputDesp.value || inputDesp.value && inputDesp.value.length > 128) {
+            if (!inputDesp.value) {
+                despError.textContent = `Please add Description`;
+                despError.closest(".popup").classList.add("show");
+                check = true;
+            }
+            if (inputDesp.value && inputDesp.value.length > 128) {
+                despError.textContent = `Despcription should be between 1 and 128 characters, Thank you!`;
+                despError.closest(".popup").classList.add("show");
+                check = true;
+            }
+        } else despError.closest(".popup").classList.remove("show");
+        if (!inputPrice.value || !Number(inputPrice.value) || Number(inputPrice.value) < 0) {
             priceError.closest(".popup").classList.add("show");
             check = true;
-        }
+        } else priceError.closest(".popup").classList.remove("show");
         if (check) return;
         check = false;
         despError.closest(".popup").classList.remove("show");
