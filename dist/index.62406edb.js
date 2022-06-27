@@ -1,4 +1,5 @@
-const table = document.querySelector(".table");
+const positive_table = document.querySelector(".table-positive");
+const negative_table = document.querySelector(".table-negative");
 const balanceField = document.querySelector("#current-balance");
 const inputType = document.querySelector("#inputType");
 const inputDesp = document.querySelector("#inputDesp");
@@ -7,22 +8,31 @@ const inputSubmit = document.querySelector("#submitBtn");
 const despError = document.querySelector("#despError");
 const priceError = document.querySelector("#priceError");
 const typeError = document.querySelector("#typeError");
+const totalPositive = document.querySelector(".positive").children[2].children[1];
+const totalNegative = document.querySelector(".negative").children[2].children[1];
 class data {
     constructor(type, desp, amount){
         this.id = String(new Date().getTime()).slice(6);
         this.type = type;
         this.desp = desp;
-        this.amount = type === "Income" ? +amount : -amount;
+        this.amount = +amount;
     }
 }
 class App {
     #balance;
     #movements;
+    #positive_movements;
+    #negative_movements;
     constructor(){
-        if (localStorage.getItem("movements")) this.#movements = JSON.parse(localStorage.getItem("movements"));
+        if (localStorage.getItem("positive-movements")) this.#positive_movements = JSON.parse(localStorage.getItem("positive-movements"));
         else {
-            this.#movements = [];
-            localStorage.setItem("movements", []);
+            this.#positive_movements = [];
+            localStorage.setItem("positive-movements", []);
+        }
+        if (localStorage.getItem("negative-movements")) this.#negative_movements = JSON.parse(localStorage.getItem("negative-movements"));
+        else {
+            this.#negative_movements = [];
+            localStorage.setItem("negative-movements", []);
         }
         this.loadBalance();
         this.renderBalance();
@@ -32,28 +42,30 @@ class App {
     }
     loadBalance() {
         this.#balance = 0;
-        this.#movements.forEach((ele)=>this.#balance += ele.amount);
+        this.#positive_movements.forEach((ele)=>this.#balance += ele.amount);
+        this.#negative_movements.forEach((ele)=>this.#balance -= ele.amount);
         localStorage.setItem(`balance`, JSON.stringify(this.#balance));
     }
-    updateBalance(amount) {
-        this.#balance += amount;
+    updateBalance(amount, negative = false) {
+        if (negative) this.#balance -= amount;
+        else this.#balance += amount;
         localStorage.setItem("balance", this.#balance);
     }
     onLoad() {
         let markup = `<thead>
         <tr>
-            <th>Type</th>
             <th>Description</th>
             <th>Amount</th>
             <th>Edit</th>
         </tr>
     </thead>`;
-        table.innerHTML = markup;
-        this.#movements.forEach((ele)=>this.renderData(ele));
+        positive_table.innerHTML = markup;
+        this.#positive_movements.forEach((ele)=>this.renderData(ele, positive_table));
+        negative_table.innerHTML = markup;
+        this.#negative_movements.forEach((ele)=>this.renderData(ele, negative_table));
     }
-    renderData(_data) {
+    renderData(_data, table) {
         const markup = `<tr class="data-field" data-id=${_data.id}>
-        <td class="type-field">${_data.type}</td>
         <td class="description-field">${_data.desp}</td>
         <td class="amount-field">${_data.amount}</td>
         <td><button id='del-${_data.id}'>Delete</button></td>
@@ -63,16 +75,32 @@ class App {
     }
     updateMovements(data1) {
         // CHECK IF MOVMENT IS VALID
-        console.log(typeof data1.amount);
-        this.#movements.push(data1);
-        localStorage.setItem("movements", JSON.stringify(this.#movements));
-        this.updateBalance(data1.amount);
-        this.renderData(data1);
+        // console.log(typeof data.amount)
+        if (data1.type === "Income") {
+            this.#positive_movements.push(data1);
+            localStorage.setItem("positive-movements", JSON.stringify(this.#positive_movements));
+            this.updateBalance(data1.amount);
+            this.renderData(data1, positive_table);
+        } else {
+            this.#negative_movements.push(data1);
+            localStorage.setItem("negative-movements", JSON.stringify(this.#negative_movements));
+            this.updateBalance(data1.amount, true);
+            this.renderData(data1, negative_table);
+        }
         this.renderBalance();
+    }
+    renderTotals() {
+        let neg_sum = 0;
+        for(let i = 0; i < this.#negative_movements.length; i++)neg_sum += this.#negative_movements[i].amount;
+        let pos_sum = 0;
+        for(let i1 = 0; i1 < this.#positive_movements.length; i1++)pos_sum += this.#positive_movements[i1].amount;
+        totalNegative.textContent = neg_sum;
+        totalPositive.textContent = pos_sum;
     }
     renderBalance() {
         balanceField.textContent = this.#balance;
         this.#balance >= 0 ? balanceField.style.color = `green` : balanceField.style.color = `red`;
+        this.renderTotals();
     }
     addData(e) {
         e.preventDefault();
@@ -116,11 +144,18 @@ class App {
         window.requestAnimationFrame(this.color.bind(this));
     }
     deleteMovement(id) {
-        for(let i = 0; i < this.#movements.length; i++)if (this.#movements[i].id === id) {
-            this.#balance -= +this.#movements[i].amount;
+        for(let i = 0; i < this.#positive_movements.length; i++)if (this.#positive_movements[i].id === id) {
+            this.#balance -= +this.#positive_movements[i].amount;
             localStorage.setItem("balance", this.#balance);
-            this.#movements.splice(i, 1);
-            localStorage.setItem("movements", JSON.stringify(this.#movements));
+            this.#positive_movements.splice(i, 1);
+            localStorage.setItem("positive-movements", JSON.stringify(this.#positive_movements));
+            break;
+        }
+        for(let i2 = 0; i2 < this.#negative_movements.length; i2++)if (this.#negative_movements[i2].id === id) {
+            this.#balance -= +this.#negative_movements[i2].amount;
+            localStorage.setItem("balance", this.#balance);
+            this.#negative_movements.splice(i2, 1);
+            localStorage.setItem("negative-movements", JSON.stringify(this.#negative_movements));
             break;
         }
         // console.log(document.getElementsByClassName('data-field'),`helllo`);

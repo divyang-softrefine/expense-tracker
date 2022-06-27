@@ -40,16 +40,46 @@ $text-default : #10617f;
 }
 .table-container{
     width: 100%;
-    height: initial;
+    height: inherit;
     overflow-y: auto;
-}
-.table{
-    width: 100%;
+    display: flex;
+    gap : 2rem;
+    flex-flow: row wrap;
+
+    &>*{
     margin-top: 1rem;
     border-collapse: separate;
     border-spacing: .2rem .5em;
     font-size: 1.4rem;
+    flex-grow: 1;
+    &>h3{
+        width: 100%;
+        font-size: 3rem;
+        text-align: center;
+    }
+    & table{
+        width: 100%;
+        margin-top: 1rem;
+        border-collapse: separate;
+        border-spacing: .2rem .5em;
+        font-size: 1.4rem;
+        flex-grow: 1;    
+    }
+    }
 }
+
+.positive,.negative{
+    position: relative;
+    overflow: hidden;
+    .total-container{
+        position : absolute;
+        display: flex;
+        justify-content: space-between;
+        bottom : 0;
+        width: 100%;
+    }
+}
+
 thead{
     *{
         background-color: #1699c9;
@@ -82,13 +112,13 @@ tr{
     width: 100%;
     &>*{
         
-        &:not(:nth-child(2)){
+        &:not(:nth-child(1)){
             text-align: center;
         }
 
 
-        &:nth-child(2){
-        width: 70%;
+        &:nth-child(1){
+        width: 60%;
         }
     }
 }

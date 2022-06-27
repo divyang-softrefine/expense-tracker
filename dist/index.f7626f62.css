@@ -39,16 +39,47 @@ html {
 
 .table-container {
   width: 100%;
-  height: initial;
+  height: inherit;
+  flex-flow: wrap;
+  gap: 2rem;
+  display: flex;
   overflow-y: auto;
 }
 
-.table {
+.table-container > * {
+  border-collapse: separate;
+  border-spacing: .2rem .5em;
+  flex-grow: 1;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}
+
+.table-container > * > h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.table-container > * table {
   width: 100%;
   border-collapse: separate;
   border-spacing: .2rem .5em;
+  flex-grow: 1;
   margin-top: 1rem;
   font-size: 1.4rem;
+}
+
+.positive, .negative {
+  position: relative;
+  overflow: hidden;
+}
+
+.positive .total-container, .negative .total-container {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  position: absolute;
+  bottom: 0;
 }
 
 thead * {
@@ -83,12 +114,12 @@ tr {
   width: 100%;
 }
 
-tr > :not(:nth-child(2)) {
+tr > :not(:nth-child(1)) {
   text-align: center;
 }
 
-tr > :nth-child(2) {
-  width: 70%;
+tr > :nth-child(1) {
+  width: 60%;
 }
 
 input {
