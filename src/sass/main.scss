@@ -13,6 +13,7 @@ $text-default : #555;
     color: inherit;
     text-decoration: inherit;
     font-size: inherit;
+    word-wrap: break-word;
 }
 
 .m-auto{
@@ -33,7 +34,8 @@ $text-default : #555;
     color : $text-default;
 }
 .heading-two{
-    font-size: 2.4rem;
+    margin-top: 5rem;
+    font-size: 4.8rem;
     color: white;
     text-transform: uppercase;
 }
@@ -50,6 +52,7 @@ $text-default : #555;
     border-spacing: .2rem .5em;
     font-size: 1.4rem;
     flex-grow: 1;
+    width: 45%;
     &>h3{
         width: 100%;
         font-size: 3rem;
@@ -97,40 +100,61 @@ td{
     border-bottom: 1px solid #999;
 }
 .form-control{
-    font-size: 1.4rem;
+    font-size: 2.4rem;
 }
-
+.form-container{
+    width: 100%;
+}
+.popup{
+    &>*{
+        width: 100%;
+    }
+}
 #form{
+    width: 95%;
     display: flex;
     flex-flow: row wrap;
     gap : .5rem;
+    &>*{
+        flex-grow: 1;
+    }
     align-items: center;
     justify-content: center;
 }
 .balance-container{
+    min-height: 25vh;
+
+    margin-bottom: 2rem;
     width: fit-content;
     gap: 2rem;
     margin-top: 1rem;
-    padding-bottom: 2rem;
     display: grid;
-    grid-template-columns: repeat(1,3fr);
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     justify-items: center;
     &>*:first-child{
         grid-row: 1;
         grid-column: 1;
-        font-size: 3.2rem;
+        font-size: 4.8rem;
     }
     &>*:nth-child(2){
         grid-column: span 2;
         grid-row: 1;
-        font-size: 3.2rem;
+        font-size: 6.4rem;
     }
     &>*:last-child{
+        width: 100%;
         grid-row: 2;
         grid-column: span 3;
+        align-self: flex-start;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        justify-items: center;
+        &>*{
+            grid-row: 1;
+        }
         margin: 0 auto;
-        font-size: 2.4rem;
+        font-size: 3.6rem;
     }
     justify-content: space-between;
     color : white;
@@ -147,7 +171,7 @@ tr{
         &:nth-child(1){
         width: 60%;
         max-width: 200px;
-        overflow-x: auto;
+        word-wrap: break-word;
         }
         &:last-child{
             text-align: center;
@@ -191,11 +215,12 @@ select{
   /* The actual popup */
   .popup .popuptext {
     visibility: hidden;
-    width: 160px;
+    width: 50%;
     background-color: #fff;
     color: red;
     text-align: center;
     border-radius: 6px;
+    font-size: 1.6rem;
     padding: 8px 1rem;
     position: absolute;
     
@@ -237,3 +262,83 @@ select{
     from {opacity: 0;}
     to {opacity:1 ;}
   }
+
+
+
+@media (max-width : 768px){
+    html{
+    font-size: 55%;
+    }
+
+    .table-container{
+        display: grid;
+        grid-template-columns: 1fr;
+        &>*{
+            width: 100%;
+        }
+    }
+}
+@media (max-width : 425px) {
+    html{
+        font-size: 50%;
+    }
+    .heading-two{
+        margin-top: 1rem;
+        font-size: 2.4rem;
+    }
+
+    .balance-container{
+        min-height: 15vh;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        width: 95vw;
+        &>*:first-child{
+            font-size: 2.4rem;
+        }
+        &>*{
+            &:nth-child(2){
+                font-size: 3.2rem;
+            }
+            &:nth-child(3){
+                font-size: 2.4rem;
+            }
+        }
+    }
+    #form{
+        width: 100%;
+        flex-flow: column nowrap;
+        &>*{
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width : 240px) {
+    html{
+        font-size: 45%;
+    }
+    .heading-two{
+        font-size: 2rem;
+    }
+    .balance-container{
+        &>*:first-child{
+            font-size: 2rem;
+        }
+    }
+    
+    .positive,.negative{
+        font-size: 1.4rem;
+    }
+    tr{
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+        &>*{
+            width: 100%;
+        }
+        &>*:nth-child(1){
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}

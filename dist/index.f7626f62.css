@@ -9,6 +9,7 @@ html {
   color: inherit;
   text-decoration: inherit;
   font-size: inherit;
+  word-wrap: break-word;
   margin: 0;
   padding: 0;
 }
@@ -34,7 +35,8 @@ html {
 .heading-two {
   color: #fff;
   text-transform: uppercase;
-  font-size: 2.4rem;
+  margin-top: 5rem;
+  font-size: 4.8rem;
 }
 
 .table-container {
@@ -49,6 +51,7 @@ html {
 
 .table-container > * {
   border-spacing: .2rem .5em;
+  width: 45%;
   flex-grow: 1;
   font-size: 1.4rem;
 }
@@ -100,10 +103,15 @@ td {
 }
 
 .form-control {
-  font-size: 1.4rem;
+  font-size: 2.4rem;
+}
+
+.form-container, .popup > * {
+  width: 100%;
 }
 
 #form {
+  width: 95%;
   flex-flow: wrap;
   justify-content: center;
   align-items: center;
@@ -111,34 +119,48 @@ td {
   display: flex;
 }
 
+#form > * {
+  flex-grow: 1;
+}
+
 .balance-container {
+  min-height: 25vh;
   width: fit-content;
   color: #fff;
   text-transform: uppercase;
-  grid-template-columns: repeat(1, 3fr);
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   place-items: center;
   gap: 2rem;
   margin-top: 1rem;
-  padding-bottom: 2rem;
+  margin-bottom: 2rem;
   font-weight: 700;
   display: grid;
 }
 
 .balance-container > :first-child {
   grid-area: 1 / 1;
-  font-size: 3.2rem;
+  font-size: 4.8rem;
 }
 
 .balance-container > :nth-child(2) {
   grid-area: 1 / span 2;
-  font-size: 3.2rem;
+  font-size: 6.4rem;
 }
 
 .balance-container > :last-child {
+  width: 100%;
   grid-area: 2 / span 3;
+  grid-template-columns: repeat(2, 1fr);
+  align-self: flex-start;
+  justify-items: center;
   margin: 0 auto;
-  font-size: 2.4rem;
+  font-size: 3.6rem;
+  display: grid;
+}
+
+.balance-container > :last-child > * {
+  grid-row: 1;
 }
 
 tr {
@@ -153,7 +175,7 @@ tr > * {
 tr > :nth-child(1) {
   width: 60%;
   max-width: 200px;
-  overflow-x: auto;
+  word-wrap: break-word;
 }
 
 tr > :last-child {
@@ -193,7 +215,7 @@ select {
 
 .popup .popuptext {
   visibility: hidden;
-  width: 160px;
+  width: 50%;
   color: red;
   text-align: center;
   z-index: 1;
@@ -201,6 +223,7 @@ select {
   border-radius: 6px;
   margin-left: -80px;
   padding: 8px 1rem;
+  font-size: 1.6rem;
   position: absolute;
   bottom: 125%;
   left: 50%;
@@ -228,6 +251,88 @@ select {
 
   to {
     opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 55%;
+  }
+
+  .table-container {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .table-container > * {
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  html {
+    font-size: 50%;
+  }
+
+  .heading-two {
+    margin-top: 1rem;
+    font-size: 2.4rem;
+  }
+
+  .balance-container {
+    min-height: 15vh;
+    width: 95vw;
+    margin: 0 auto 2rem;
+  }
+
+  .balance-container > :first-child {
+    font-size: 2.4rem;
+  }
+
+  .balance-container > :nth-child(2) {
+    font-size: 3.2rem;
+  }
+
+  .balance-container > :nth-child(3) {
+    font-size: 2.4rem;
+  }
+
+  #form {
+    width: 100%;
+    flex-flow: column;
+  }
+
+  #form > * {
+    width: 100%;
+  }
+}
+
+@media (max-width: 240px) {
+  html {
+    font-size: 45%;
+  }
+
+  .heading-two, .balance-container > :first-child {
+    font-size: 2rem;
+  }
+
+  .positive, .negative {
+    font-size: 1.4rem;
+  }
+
+  tr {
+    flex-flow: column;
+    gap: 1rem;
+    display: flex;
+  }
+
+  tr > * {
+    width: 100%;
+  }
+
+  tr > :nth-child(1) {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
