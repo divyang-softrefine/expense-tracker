@@ -11,6 +11,13 @@ const typeError = document.querySelector('#typeError');
 const totalPositive = document.querySelector('.total-positive');
 const totalNegative = document.querySelector('.total-negative');
 
+var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'INR',
+    // minimumFractionDigits: 10, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    // maximumFractionDigits: 80, // (causes 2500.99 to be printed as $2,501)
+});
+
 class data{
     constructor(type,desp,amount){
         this.id = String(new Date().getTime()).slice(6);
@@ -82,7 +89,7 @@ class App{
     renderData(_data,table){
         const  markup = `<tr class="data-field" data-id=${_data.id}>
         <td class="description-field">${_data.desp}</td>
-        <td class="amount-field">${table===positive_table ? _data.amount:-_data.amount}</td>
+        <td class="amount-field">${table===positive_table ? formatter.format(_data.amount):formatter.format(-_data.amount)}</td>
         <td><button id='del-${_data.id}'>Delete</button></td>
         </tr> `;
         table.insertAdjacentHTML('beforeend',markup);
@@ -116,12 +123,12 @@ class App{
         for(let i = 0; i < this.#positive_movements.length; i++)
             pos_sum+=this.#positive_movements[i].amount;
         
-        totalNegative.textContent = `${pos_sum === 0 ? `` : `(${Math.round((neg_sum/pos_sum )* 100)}%)`} ${neg_sum}`;
-        totalPositive.textContent =  `${pos_sum}`;
+        totalNegative.textContent = `${pos_sum === 0 ? `` : `(${Math.round((neg_sum/pos_sum )* 100)}%)`} ${formatter.format(neg_sum)}`;
+        totalPositive.textContent =  `${formatter.format(pos_sum)}`;
     }
 
     renderBalance(){
-        balanceField.textContent = this.#balance;
+        balanceField.textContent = formatter.format(this.#balance);
         this.#balance >= 0 ? balanceField.style.color = `green` : balanceField.style.color = `red`;
 
         this.renderTotals();
