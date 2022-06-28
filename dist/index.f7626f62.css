@@ -67,7 +67,6 @@ html {
 
 .positive, .negative {
   background-color: #fff;
-  border-radius: 2rem;
   flex-flow: column;
   padding: 1rem;
   display: flex;
