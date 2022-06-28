@@ -153,7 +153,7 @@ class App {
             break;
         }
         for(let i2 = 0; i2 < this.#negative_movements.length; i2++)if (this.#negative_movements[i2].id === id) {
-            this.#balance -= +this.#negative_movements[i2].amount;
+            this.#balance += +this.#negative_movements[i2].amount;
             localStorage.setItem("balance", this.#balance);
             this.#negative_movements.splice(i2, 1);
             localStorage.setItem("negative-movements", JSON.stringify(this.#negative_movements));
