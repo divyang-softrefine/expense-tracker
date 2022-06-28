@@ -8,8 +8,8 @@ const inputSubmit = document.querySelector('#submitBtn');
 const despError = document.querySelector('#despError');
 const priceError = document.querySelector('#priceError');
 const typeError = document.querySelector('#typeError');
-const totalPositive = document.querySelector('.positive').children[2].children[1];
-const totalNegative = document.querySelector('.negative').children[2].children[1];
+const totalPositive = document.querySelector('.total-positive');
+const totalNegative = document.querySelector('.total-negative');
 
 class data{
     constructor(type,desp,amount){
@@ -82,7 +82,7 @@ class App{
     renderData(_data,table){
         const  markup = `<tr class="data-field" data-id=${_data.id}>
         <td class="description-field">${_data.desp}</td>
-        <td class="amount-field">${_data.amount}</td>
+        <td class="amount-field">${table===positive_table ? _data.amount:-_data.amount}</td>
         <td><button id='del-${_data.id}'>Delete</button></td>
         </tr> `;
         table.insertAdjacentHTML('beforeend',markup);
@@ -116,7 +116,7 @@ class App{
         for(let i = 0; i < this.#positive_movements.length; i++)
             pos_sum+=this.#positive_movements[i].amount;
         
-        totalNegative.textContent = `${pos_sum === 0 ? `` : `(${Math.round((neg_sum/pos_sum )* 100)}% of Income used)`} ${neg_sum}`;
+        totalNegative.textContent = `${pos_sum === 0 ? `` : `(${Math.round((neg_sum/pos_sum )* 100)}%)`} ${neg_sum}`;
         totalPositive.textContent =  `${pos_sum}`;
     }
 

@@ -22,19 +22,17 @@ html {
   width: 100vw;
   height: auto;
   min-height: 100vh;
-  color: #333;
-  background-color: #ffffff80;
+  color: #555;
+  background-color: #333;
   flex-flow: column;
   align-items: center;
-  gap: 2rem;
-  padding: 2rem;
   display: flex;
   overflow: hidden;
   box-shadow: 0 0 15px #00000020;
 }
 
 .heading-two {
-  color: #333;
+  color: #fff;
   text-transform: uppercase;
   font-size: 2.4rem;
 }
@@ -44,6 +42,7 @@ html {
   flex-flow: wrap;
   flex-grow: 1;
   gap: 2rem;
+  padding-top: 2rem;
   display: flex;
   overflow-y: auto;
 }
@@ -51,7 +50,6 @@ html {
 .table-container > * {
   border-spacing: .2rem .5em;
   flex-grow: 1;
-  margin-top: 1rem;
   font-size: 1.4rem;
 }
 
@@ -64,16 +62,7 @@ html {
 .table-container > * table {
   width: 100%;
   border-spacing: .2rem .5em;
-  margin-top: 1rem;
   font-size: 1.4rem;
-}
-
-.total-container {
-  flex-flow: row;
-  justify-content: space-between;
-  margin-top: auto;
-  padding: 0 1rem;
-  display: flex;
 }
 
 .positive, .negative {
@@ -85,12 +74,20 @@ html {
   overflow: hidden;
 }
 
-.positive .total {
+.total-positive {
   color: green;
 }
 
-.negative .total {
+.total-positive:after {
+  content: "↑";
+}
+
+.total-negative {
   color: red;
+}
+
+.total-negative:after {
+  content: "↓";
 }
 
 thead * {
@@ -117,19 +114,32 @@ td {
 
 .balance-container {
   width: fit-content;
-  color: #333;
+  color: #fff;
   text-transform: uppercase;
-  flex-flow: wrap;
+  grid-template-columns: repeat(1, 3fr);
   justify-content: space-between;
+  place-items: center;
   gap: 2rem;
   margin-top: 1rem;
-  font-size: 3.6rem;
+  padding-bottom: 2rem;
   font-weight: 700;
-  display: flex;
+  display: grid;
 }
 
-.balance-container h3 {
-  color: #fff;
+.balance-container > :first-child {
+  grid-area: 1 / 1;
+  font-size: 3.2rem;
+}
+
+.balance-container > :nth-child(2) {
+  grid-area: 1 / span 2;
+  font-size: 3.2rem;
+}
+
+.balance-container > :last-child {
+  grid-area: 2 / span 3;
+  margin: 0 auto;
+  font-size: 2.4rem;
 }
 
 tr {
@@ -145,6 +155,18 @@ tr > :nth-child(1) {
   width: 60%;
   max-width: 200px;
   overflow-x: auto;
+}
+
+tr > :last-child {
+  text-align: center;
+}
+
+.table-negative .amount-field {
+  color: red;
+}
+
+.table-positive .amount-field {
+  color: green;
 }
 
 input {

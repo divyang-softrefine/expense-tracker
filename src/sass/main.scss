@@ -5,7 +5,7 @@ html{
     font-family: 'Roboto', sans-serif;
 }
 
-$text-default : #333;
+$text-default : #555;
 *,*::after,*::before{
     margin: 0;
     box-sizing: border-box;
@@ -24,32 +24,29 @@ $text-default : #333;
     width: 100vw;
     height: auto;
     min-height: 100vh;
-    padding : 2rem;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #333;
     box-shadow: 0 0 15px rgba(0,0,0,0.125);
     display: flex;
     flex-flow: column nowrap;
     overflow: hidden;
-    gap : 2rem;
-    row-gap: 2rem;
     align-items: center;
     color : $text-default;
 }
 .heading-two{
     font-size: 2.4rem;
-    color: $text-default;
+    color: white;
     text-transform: uppercase;
 }
 .table-container{
+    padding-top: 2rem;
     width: 100%;
     flex-grow: 1;
     overflow-y: auto;
     display: flex;
     gap : 2rem;
     flex-flow: row wrap;
-
+    
     &>*{
-    margin-top: 1rem;
     border-spacing: .2rem .5em;
     font-size: 1.4rem;
     flex-grow: 1;
@@ -60,18 +57,10 @@ $text-default : #333;
     }
     & table{
         width: 100%;
-        margin-top: 1rem;
         border-spacing: .2rem .5em;
         font-size: 1.4rem;
     }
     }
-}
-.total-container{
-    margin-top: auto;
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-    padding: 0 1rem;
 }
 .positive,.negative{
     display: flex;
@@ -83,17 +72,21 @@ $text-default : #333;
     padding : 1rem;
 }
 
-.positive{
-    .total{
+.total{
+    &-positive{
         color : green;
+        &::after{
+            content: '↑';
+        }
+    }
+    &-negative{
+        color: red;
+        &::after{
+            content: '↓';
+        }
     }
 }
 
-.negative{
-    .total{
-        color : red;
-    }
-}
 thead{
     *{
         text-transform: uppercase;
@@ -120,15 +113,30 @@ td{
     width: fit-content;
     gap: 2rem;
     margin-top: 1rem;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    font-size: 3.6rem;
-    color: $text-default;
-    text-transform: uppercase;
-    h3{
-        color: white;
+    padding-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(1,3fr);
+    align-items: center;
+    justify-items: center;
+    &>*:first-child{
+        grid-row: 1;
+        grid-column: 1;
+        font-size: 3.2rem;
     }
+    &>*:nth-child(2){
+        grid-column: span 2;
+        grid-row: 1;
+        font-size: 3.2rem;
+    }
+    &>*:last-child{
+        grid-row: 2;
+        grid-column: span 3;
+        margin: 0 auto;
+        font-size: 2.4rem;
+    }
+    justify-content: space-between;
+    color : white;
+    text-transform: uppercase;
     font-weight: 700;
 }
 
@@ -143,9 +151,21 @@ tr{
         max-width: 200px;
         overflow-x: auto;
         }
+        &:last-child{
+            text-align: center;
+        }
     }
 }
-
+.table-negative{
+    .amount-field{
+        color : red;
+    }
+}
+.table-positive{
+    .amount-field{
+        color : green;
+    }
+}
 input{
     padding : 1rem;
     border-style: solid;
