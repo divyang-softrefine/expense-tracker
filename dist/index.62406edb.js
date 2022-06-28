@@ -118,7 +118,7 @@ class App {
             check = true;
         } else typeError.closest(".popup").classList.remove("show");
         // console.log(inputDesp.value.length)
-        if (!inputDesp.value || inputDesp.value && inputDesp.value.length > 128) {
+        if (!inputDesp.value || inputDesp.value && inputDesp.value.length > 512) {
             if (!inputDesp.value) {
                 despError.textContent = `Please add Description`;
                 despError.closest(".popup").classList.add("show");
@@ -127,8 +127,8 @@ class App {
                 }, 5000);
                 check = true;
             }
-            if (inputDesp.value && inputDesp.value.length > 128) {
-                despError.textContent = `Despcription should be between 1 and 128 characters, Thank you!`;
+            if (inputDesp.value && inputDesp.value.length > 512) {
+                despError.textContent = `Despcription should be between 1 and 512 characters, Thank you!`;
                 despError.closest(".popup").classList.add("show");
                 setTimeout(()=>{
                     despError.closest(".popup").classList.remove("show");

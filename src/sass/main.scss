@@ -13,7 +13,6 @@ $text-default : #555;
     color: inherit;
     text-decoration: inherit;
     font-size: inherit;
-    word-wrap: break-word;
 }
 
 .m-auto{
@@ -160,29 +159,25 @@ td{
     margin-top: 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(2,1fr);
     align-items: center;
     justify-items: center;
     &>*:first-child{
-        grid-row: 1;
         grid-column: 1;
         font-size: 4.8rem;
     }
     &>*:nth-child(2){
-        grid-column: span 2;
-        grid-row: 1;
+        grid-column: 2;
         font-size: 6.4rem;
     }
     &>*:last-child{
         width: 100%;
-        grid-row: 2;
-        grid-column: span 3;
+        grid-column: span 2;
         align-self: flex-start;
         display: grid;
         grid-template-columns: repeat(2,1fr);
         justify-items: center;
-        &>*{
-            grid-row: 1;
-        }
+        
         margin: 0 auto;
         font-size: 3.6rem;
     }
@@ -305,6 +300,16 @@ select{
         grid-template-columns: 1fr;
         &>*{
             width: 100%;
+        }
+    }
+    .balance-container{
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 1fr 1fr 1fr;
+        &>*{
+            grid-column: 1/-1 !important;
+        }
+        &>*:last-child{
+            grid-template-columns: 1fr !important;
         }
     }
 }

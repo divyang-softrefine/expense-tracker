@@ -9,7 +9,6 @@ html {
   color: inherit;
   text-decoration: inherit;
   font-size: inherit;
-  word-wrap: break-word;
   margin: 0;
   padding: 0;
 }
@@ -156,6 +155,7 @@ td {
   width: fit-content;
   color: #fff;
   text-transform: uppercase;
+  grid-template-rows: repeat(2, 1fr);
   grid-template-columns: 1fr 1fr;
   justify-content: space-between;
   place-items: center;
@@ -167,28 +167,24 @@ td {
 }
 
 .balance-container > :first-child {
-  grid-area: 1 / 1;
+  grid-column: 1;
   font-size: 4.8rem;
 }
 
 .balance-container > :nth-child(2) {
-  grid-area: 1 / span 2;
+  grid-column: 2;
   font-size: 6.4rem;
 }
 
 .balance-container > :last-child {
   width: 100%;
-  grid-area: 2 / span 3;
+  grid-column: span 2;
   grid-template-columns: repeat(2, 1fr);
   align-self: flex-start;
   justify-items: center;
   margin: 0 auto;
   font-size: 3.6rem;
   display: grid;
-}
-
-.balance-container > :last-child > * {
-  grid-row: 1;
 }
 
 tr {
@@ -294,6 +290,19 @@ select {
 
   .table-container > * {
     width: 100%;
+  }
+
+  .balance-container {
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr !important;
+  }
+
+  .balance-container > * {
+    grid-column: 1 / -1 !important;
+  }
+
+  .balance-container > :last-child {
+    grid-template-columns: 1fr !important;
   }
 }
 
