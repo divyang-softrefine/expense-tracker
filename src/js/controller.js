@@ -1,3 +1,5 @@
+
+
 const positive_table = document.querySelector('.table-positive');
 const negative_table = document.querySelector('.table-negative');
 const balanceField = document.querySelector('#current-balance');
@@ -30,7 +32,6 @@ class data{
 class App{
     
     #balance;
-    #movements;
     #positive_movements;
     #negative_movements;
     constructor(){
@@ -55,7 +56,22 @@ class App{
         this.onLoad();
         this.addHandler();
         this.renderTotals();
+        this.navBar();
         // console.log(this.#balance,this.#movements)
+    }
+    navBar(){
+        const navBar = document.createElement("div");
+        navBar.className = 'nav-bar';
+        const appName = document.createElement('h2');
+        appName.className = 'heading-two';
+        appName.innerHTML = `Expense Tracker`;
+        navBar.appendChild(appName)
+        const button = document.createElement("button");
+        button.innerHTML = "Clear Data";
+        button.className = 'clearAllButton';
+        button.addEventListener('click',this.clearLocalData.bind(this));
+        navBar.appendChild(button);
+        document.querySelector(`body`).children[0].insertAdjacentElement('afterbegin',navBar);
     }
     loadBalance(){
         this.#balance = 0;
@@ -72,12 +88,32 @@ class App{
 
         localStorage.setItem('balance',this.#balance);
     }
+    clearData(){
+        window.localStorage.clear();
+        this.#balance = 0;
+        this.#negative_movements = [];
+        this.#positive_movements = [];
+        localStorage.setItem('positive-movements',[]);
+        localStorage.setItem('negative-movements',[]);
+    }
+    clearLocalData(e){
+        e.preventDefault();
+        if(confirm('THIS WILL DELETE ALL LOCAL DATA OF EXPENSE TRACKER. PLEASE PROCEED WITH CAUTION')){
+            
+            this.clearData();
+            this.loadBalance();
+            this.renderBalance();
+            this.onLoad();
+            this.renderTotals();
+
+        }
+    }
     onLoad(){
         let markup = `<thead>
         <tr>
             <th>Description</th>
             <th>Amount</th>
-            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>`;
         positive_table.innerHTML = markup;
