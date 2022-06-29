@@ -150,6 +150,7 @@ td {
 .data-field > :last-child:hover {
   color: #fff;
   background-color: tomato;
+  border-bottom-color: tomato;
 }
 
 .data-field button {
